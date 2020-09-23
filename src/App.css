@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 5px 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 20px;
+}
+
+input,
+textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+}
+
+div,
+pre {
+  width: 500px;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+div p {
+  width: 100%;
+}
+div button {
+  width: 100px;
+}
+
+pre {
+  margin-top: 30px;
+}
