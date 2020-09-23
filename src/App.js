@@ -3,6 +3,7 @@ import Amplify, { API } from "aws-amplify";
 import "./App.css";
 
 function App() {
+  const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState("");
   // const [bearer, setBearer] = useState("");
   const [response, setResponse] = useState(null);
@@ -11,6 +12,7 @@ function App() {
   async function test(e) {
     e.preventDefault();
 
+    setLoading(true);
     setResponse(null);
     setError(null);
 
@@ -30,8 +32,14 @@ function App() {
 
     console.log(url);
     await API.get("Default", url)
-      .then((response) => setResponse(JSON.stringify(response, null, 2)))
-      .catch((error) => setError(error.message));
+      .then((response) => {
+        setResponse(JSON.stringify(response, null, 2));
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+      });
   }
 
   return (
@@ -43,6 +51,7 @@ function App() {
             value={url}
             placeholder="https://api.github.com/users/gusribeiro"
             onChange={(e) => setUrl(e.target.value)}
+            readOnly={loading}
           />
         </p>
         {/* <p>
@@ -51,7 +60,7 @@ function App() {
             onChange={(e) => setBearer(e.target.value)}
           ></textarea>
         </p> */}
-        <button type="button" onClick={(e) => test(e)}>
+        <button type="button" onClick={(e) => test(e)} disabled={loading}>
           enviar
         </button>
       </div>
