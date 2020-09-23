@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   const [url, setUrl] = useState("");
-  const [bearer, setBearer] = useState("");
+  // const [bearer, setBearer] = useState("");
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
 
