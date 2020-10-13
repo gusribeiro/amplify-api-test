@@ -5,9 +5,9 @@ import "./App.css";
 function App() {
   const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState("");
-  // const [bearer, setBearer] = useState("");
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
+  const [method, setMethod] = useState("get");
 
   async function test(e) {
     e.preventDefault();
@@ -31,7 +31,7 @@ function App() {
     });
 
     console.log(url);
-    await API.get("Default", url)
+    await API[method]("Default", url)
       .then((response) => {
         setResponse(JSON.stringify(response, null, 2));
         setLoading(false);
@@ -46,6 +46,12 @@ function App() {
     <form className="App">
       <div>
         <p>
+          <select value={method} onChange={(e) => setMethod(e.target.value)}>
+            <option value="post">POST</option>
+            <option value="get">GET</option>
+            <option value="put">PUT</option>
+            <option value="delete">DELETE</option>
+          </select>
           <input
             type=""
             value={url}
