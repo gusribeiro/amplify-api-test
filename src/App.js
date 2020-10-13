@@ -30,14 +30,13 @@ function App() {
       },
     });
 
-    console.log(url);
     await API[method]("Default", url)
       .then((response) => {
         setResponse(JSON.stringify(response, null, 2));
         setLoading(false);
       })
       .catch((error) => {
-        setError(error.message);
+        setError(JSON.stringify(error, null, 2));
         setLoading(false);
       });
   }
@@ -45,7 +44,7 @@ function App() {
   return (
     <form className="App">
       <div>
-        <p>
+        <p className="form">
           <select value={method} onChange={(e) => setMethod(e.target.value)}>
             <option value="post">POST</option>
             <option value="get">GET</option>
